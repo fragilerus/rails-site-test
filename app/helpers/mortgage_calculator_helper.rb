@@ -1,0 +1,2 @@
+module MortgageCalculatorHelper
+end

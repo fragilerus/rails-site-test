@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>MortgageCalculator</title>
+
+    <script src="/javascripts/mortgageCalculatorFunctions.js"></script>
+</head>
+<body>
+    <form name="input-form">
+        <input type="button" value="Reset" onclick="setDefaults(this.form)" />
+        <br />
+        <table>
+            <tr><td>Base Price</td><td><input type='number' name='price' onblur="calculatePayment(this.form)" autofocus/></td></tr>
+            <tr><td>Down payment</td><td><input type='number' name='downpayment' onblur="calculatePayment(this.form)"/>%</td></tr>
+            <tr><td>Interest rate</td><td><input name='interest' onblur="calculatePayment(this.form)"/>%</td></tr>
+            <tr><td>Tax</td>
+                <td><input name='tax' onblur="calculatePayment(this.form)"/>
+                    <label><input type='radio' name='tax-type' value="percent" onchange="calculatePayment(this.form)"/>%</label>
+                    <label><input type='radio' name='tax-type' value="absolute" onchange="calculatePayment(this.form)"/>$</label>
+                </td>
+            </tr>
+            <tr><td>Insurance rate</td><td><input name='insurance' onblur="calculatePayment(this.form)"/></td></tr>
+        </table>
+    </form>
+    <hr />
+    <table class='output'>
+        <tr><td>Pincipal + Interest</td><td id='mortgage-payment' class='output'></td></tr>
+        <tr><td>Tax</td><td id='tax-payment' class='output'></td></tr>
+        <tr><td>Insurance</td><td id='insurance-payment' class='output'></td></tr>
+        <tr><td>PITI</td><td id='piti-payment' class='output stress'></td></tr>
+        <tr><td>Additional Utils</td><td id='add-utils-payment' class='output'></td></tr>
+        <tr><td>Total extra monthly</td><td id='extra-cost' class='output stress'></td></tr>
+    </table>
+</body>
+</html>

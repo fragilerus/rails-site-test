@@ -1,0 +1,7 @@
+// Place all the styles related to the mortgage_caluculator controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.output {text-align:right}
+.output tr td:first-child {padding-right:25px}
+.output tr td:last-child {padding-left: 25px}
+.stress {color: red}

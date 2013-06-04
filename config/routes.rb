@@ -1,4 +1,6 @@
 RailsSiteTest::Application.routes.draw do
+  get "mortgage_calculator/index"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
