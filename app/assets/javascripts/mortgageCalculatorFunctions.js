@@ -1,11 +1,14 @@
 window.onload = function () {
-    setDefaults(document.forms['mortgage-calculator']);
-}
+    calc = new MortgageCalculator('mortgage-calculator','output');
+    calc.reset();
+    calc.wireUp();
+};
 
 MortgageCalculator = function(form, output){
   this._form = document.getElementById(form);
   this._output = document.getElementById(output);
-}
+};
+
 MortgageCalculator.prototype = function(){ 
   
     getSelectedValue = function(radios) {
@@ -50,7 +53,6 @@ MortgageCalculator.prototype = function(){
         document.getElementById(id).innerHTML = currencyFormatted(value);
     }
     
-    
     calculatePayment = function() {
         var princ = this._form.price.value * ((100 - this._form.downpayment.value) / 100);
         var intRate = (this._form.interest.value / 100) / 12;
@@ -65,9 +67,19 @@ MortgageCalculator.prototype = function(){
         setValue('piti-payment', pitiPayment);
         setValue('add-utils-payment', pitiPayment + 150);
         setValue('extra-cost', pitiPayment + 150 - 1225);
-    }
+    },
+      
+    wireUp = function(){
+      this._form.price.onblur = "calc.calculatePayment()";
+      this._form.downpayment.onblur = "calc.calculatePayment()";
+      this._form.interest.onblur = "calc.calculatePayment()";
+      this._form.tax.onblur = "calc.calculatePayment()";
+      this._form['tax-type'][0].onchange = "calc.calculatePayment()";
+      this._form['tax-type'][1].onchange = "calc.calculatePayment()";
+    };
     
   return {
-    reset: reset
-  }
-}
+    reset: reset,
+    wireUp : wireUp
+  };
+}();
