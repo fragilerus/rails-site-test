@@ -1,6 +1,6 @@
-window.onload = function () {
+/*window.onload = function () {
     setDefaults(document.forms['mortgage-calculator']);
-}
+}*/
 
 MortgageCalculator = function(form, output){
   this._form = document.getElementById(form);
@@ -8,19 +8,19 @@ MortgageCalculator = function(form, output){
 }
 MortgageCalculator.prototype = function(){ 
   
-    getSelectedValue = function(radios) {
+    var getSelectedValue = function(radios) {
         for (var i = 0, length = radios.length; i < length; i++) {
             if (radios[i].checked) {
                 return radios[i].value;
             }
         }
-    }
+    },
 
     setSelectedValue = function(radios, value) {
         for (var i = 0, length = radios.length; i < length; i++) {
             radios[i].checked = radios[i].value === value
         }
-    }
+    },
     
     reset = function () {
         this._form.price.value = 0;
@@ -29,7 +29,7 @@ MortgageCalculator.prototype = function(){
         this._form.tax.value = 0.022;
         setSelectedValue(this._form['tax-type'],'percent');
         this._form.insurance.value = 0.0024;
-    }
+    },
 
     currencyFormatted = function(amount) {
         var i = parseFloat(amount);
@@ -44,12 +44,11 @@ MortgageCalculator.prototype = function(){
         if (s.indexOf('.') == (s.length - 2)) { s += '0'; }
         s = minus + '$' + s;
         return s;
-    }
-
+    },
+    
     setValue = function(id, value) {
         document.getElementById(id).innerHTML = currencyFormatted(value);
-    }
-    
+    },
     
     calculatePayment = function() {
         var princ = this._form.price.value * ((100 - this._form.downpayment.value) / 100);
@@ -65,9 +64,20 @@ MortgageCalculator.prototype = function(){
         setValue('piti-payment', pitiPayment);
         setValue('add-utils-payment', pitiPayment + 150);
         setValue('extra-cost', pitiPayment + 150 - 1225);
-    }
-    
+    },
+  
+    _setHandlers = function(){
+      this._form.price.onblur = this.calculatePayment;
+      this._form.downpayment.onblur = this.calculatePayment;
+      this._form.interest.onblur = this.calculatePayment;
+      this._form.tax.onblur = this.calculatePayment;
+      this._form['tax-type'][0].onchange = this.calculatePayment;
+      this._form['tax-type'][1].onchange = this.calculatePayment;
+      this._form.insurance.onblur = this.calculatePayment;
+    };
+  
   return {
-    reset: reset
-  }
-}
+    reset: reset,
+    wireUp: _setHandlers
+  };
+}();
