@@ -1,12 +1,7 @@
-window.onload = function () {
-    calc = new MortgageCalculator('mortgage-calculator','output');
-    calc.reset();
-    calc.wireUp();
-};
-
 MortgageCalculator = function(form, output){
   this._form = document.getElementById(form);
   this._output = document.getElementById(output);
+  wireUp.call(this);
 };
 
 MortgageCalculator.prototype = function(){ 
@@ -70,16 +65,18 @@ MortgageCalculator.prototype = function(){
     },
       
     wireUp = function(){
-      this._form.price.onblur = "calc.calculatePayment()";
-      this._form.downpayment.onblur = "calc.calculatePayment()";
-      this._form.interest.onblur = "calc.calculatePayment()";
-      this._form.tax.onblur = "calc.calculatePayment()";
-      this._form['tax-type'][0].onchange = "calc.calculatePayment()";
-      this._form['tax-type'][1].onchange = "calc.calculatePayment()";
+      this._form.price.onblur = calculatePayment.bind(this);
+      this._form.downpayment.onblur = calculatePayment.bind(this);
+      this._form.interest.onblur = calculatePayment.bind(this);
+      this._form.tax.onblur = calculatePayment.bind(this);
+      this._form['tax-type'][0].onchange = calculatePayment.bind(this);
+      this._form['tax-type'][1].onchange = calculatePayment.bind(this);
+      this._form.insurance.onblur = calculatePayment.bind(this);
+      this._form.reset.onclick = reset.bind(this);
     };
     
-  return {
-    reset: reset,
-    wireUp : wireUp
-  };
+    return {
+      reset: reset,
+      calculatePayment: calculatePayment
+    };
 }();
