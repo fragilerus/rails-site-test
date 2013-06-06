@@ -5,11 +5,16 @@
     <title>MortgageCalculator</title>
 </head>
 <body>
+<script type='text/javascript'>
+window.onload = function () {
+    new MortgageCalculator('mortgage-calculator','output').reset();
+};
+</script>
     <form id="mortgage-calculator">
-        <input type="button" value="Reset" onclick="setDefaults(this.form)" />
+        <input type="button" value="Reset" name="reset" />
         <br />
         <table>
-            <tr><td>Base Price</td><td><input type='number' name='price'  autofocus/></td></tr>
+            <tr><td>Base Price</td><td><input type='number' name='price' autofocus /></td></tr>
             <tr><td>Down payment</td><td><input type='number' name='downpayment' />%</td></tr>
             <tr><td>Interest rate</td><td><input name='interest' />%</td></tr>
             <tr><td>Tax</td>
@@ -30,8 +35,5 @@
         <tr><td>Additional Utils</td><td id='add-utils-payment' class='output'></td></tr>
         <tr><td>Total extra monthly</td><td id='extra-cost' class='output stress'></td></tr>
     </table>
-    <script type='text/javascript'>
-      new MortgageCalculator("mortgage-calculator","output").wireUp();
-    </script>
 </body>
 </html>

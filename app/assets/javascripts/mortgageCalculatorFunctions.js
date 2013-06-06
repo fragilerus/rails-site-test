@@ -1,11 +1,9 @@
-/*window.onload = function () {
-    setDefaults(document.forms['mortgage-calculator']);
-}*/
-
 MortgageCalculator = function(form, output){
   this._form = document.getElementById(form);
   this._output = document.getElementById(output);
-}
+  this.wireUp.call(this);
+};
+
 MortgageCalculator.prototype = function(){ 
   
     var getSelectedValue = function(radios) {
@@ -65,19 +63,21 @@ MortgageCalculator.prototype = function(){
         setValue('add-utils-payment', pitiPayment + 150);
         setValue('extra-cost', pitiPayment + 150 - 1225);
     },
-  
-    _setHandlers = function(){
-      this._form.price.onblur = this.calculatePayment;
-      this._form.downpayment.onblur = this.calculatePayment;
-      this._form.interest.onblur = this.calculatePayment;
-      this._form.tax.onblur = this.calculatePayment;
-      this._form['tax-type'][0].onchange = this.calculatePayment;
-      this._form['tax-type'][1].onchange = this.calculatePayment;
-      this._form.insurance.onblur = this.calculatePayment;
+      
+    wireUp = function(){
+      this._form.price.onblur = calculatePayment.bind(this);
+      this._form.downpayment.onblur = calculatePayment.bind(this);
+      this._form.interest.onblur = calculatePayment.bind(this);
+      this._form.tax.onblur = calculatePayment.bind(this);
+      this._form['tax-type'][0].onchange = calculatePayment.bind(this);
+      this._form['tax-type'][1].onchange = calculatePayment.bind(this);
+      this._form.insurance.onblur = calculatePayment.bind(this);
+      this._form.reset.onclick = reset.bind(this);
     };
-  
-  return {
-    reset: reset,
-    wireUp: _setHandlers
-  };
+    
+    return {
+      reset: reset,
+      wireUp: wireUp,
+      calculatePayment: calculatePayment
+    };
 }();
