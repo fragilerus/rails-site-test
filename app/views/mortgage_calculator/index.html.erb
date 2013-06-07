@@ -14,7 +14,8 @@ window.onload = function () {
         <input type="button" value="Reset" name="reset" />
         <br />
         <table>
-            <tr><td>Base Price</td><td><input type='number' name='price' autofocus /></td></tr>
+        <caption>Based on a 30 year monthly pament</caption>
+        <tr><td>Base Price</td><td><input type='number' name='price' autofocus /></td></tr>
             <tr><td>Down payment</td><td><input type='number' name='downpayment' />%</td></tr>
             <tr><td>Interest rate</td><td><input name='interest' />%</td></tr>
             <tr><td>Tax</td>
@@ -25,6 +26,7 @@ window.onload = function () {
             </tr>
             <tr><td>Insurance rate</td><td><input name='insurance' /></td></tr>
             <tr><td>Current Monthly rent</td><td><input name='current-cost' /></td></tr>
+            <tr><td>Additional Costs (higher utils, etc.)</td><td><input name='additional' /></td></tr>
         </table>
     </form>
     <hr />
@@ -33,8 +35,8 @@ window.onload = function () {
         <tr><td>Tax</td><td id='tax-payment' class='output'></td></tr>
         <tr><td>Insurance</td><td id='insurance-payment' class='output'></td></tr>
         <tr><td>PITI</td><td id='piti-payment' class='output stress'></td></tr>
-        <tr><td>Additional 150 Utils</td><td id='add-utils-payment' class='output'></td></tr>
-        <tr><td>Total extra monthly</td><td id='extra-cost' class='output stress'></td></tr>
+        <tr><td>+Additional Costs</td><td id='add-additional' class='output'></td></tr>
+        <tr><td>Total extra</td><td id='extra-cost' class='output stress'></td></tr>
     </table>
 </body>
 </html>
