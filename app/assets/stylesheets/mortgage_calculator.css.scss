@@ -5,3 +5,9 @@
 .output tr td:first-child {padding-right:25px}
 .output tr td:last-child {padding-left: 25px}
 .stress {color: red}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
