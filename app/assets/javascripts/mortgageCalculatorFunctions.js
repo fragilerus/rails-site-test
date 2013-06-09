@@ -48,7 +48,7 @@ MortgageCalculator.prototype = function(){
     },
     
     setValue = function(id, value) {
-        document.getElementById(id).innerHTML = currencyFormatted(value);
+        this._form[id].value = currencyFormatted(value);
     },
     
     calculatePayment = function() {
@@ -61,12 +61,12 @@ MortgageCalculator.prototype = function(){
         var taxPayment = (getSelectedValue(this._form['tax-type']) == 'percent' ? this._form.tax.value * this._form.price.value : this._form.tax.value) / 12;
         var insurancePayment = this._form.insurance.value * this._form.price.value / 12;
         var pitiPayment = monthlyPayment + taxPayment + insurancePayment;
-        setValue('mortgage-payment', monthlyPayment);
-        setValue('tax-payment', taxPayment);
-        setValue('insurance-payment', insurancePayment);
-        setValue('piti-payment', pitiPayment);
-        setValue('add-additional', pitiPayment + additionalCost);
-        setValue('extra-cost', pitiPayment + additionalCost - currentCost);
+        setValue.call(this,'mortgage-payment', monthlyPayment);
+        setValue.call(this,'tax-payment', taxPayment);
+        setValue.call(this,'insurance-payment', insurancePayment);
+        setValue.call(this,'piti-payment', pitiPayment);
+        setValue.call(this,'add-additional', pitiPayment + additionalCost);
+        setValue.call(this,'extra-cost', pitiPayment + additionalCost - currentCost);
     },
       
     wireUp = function(){

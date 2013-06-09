@@ -28,15 +28,16 @@ window.onload = function () {
             <tr><td>Current Monthly rent</td><td><input name='current-cost' /></td></tr>
             <tr><td>Additional Costs (higher utils, etc.)</td><td><input name='additional' /></td></tr>
         </table>
-    </form>
+    
     <hr />
     <table class='output'>
-        <tr><td>Pincipal + Interest</td><td id='mortgage-payment' class='output'></td></tr>
-        <tr><td>Tax</td><td id='tax-payment' class='output'></td></tr>
-        <tr><td>Insurance</td><td id='insurance-payment' class='output'></td></tr>
-        <tr><td>PITI</td><td id='piti-payment' class='output stress'></td></tr>
-        <tr><td>+Additional Costs</td><td id='add-additional' class='output'></td></tr>
-        <tr><td>Total extra</td><td id='extra-cost' class='output stress'></td></tr>
+        <tr><td>Pincipal + Interest</td><td><output name='mortgage-payment' class='output' /></td></tr>
+        <tr><td>Tax</td><td><output name='tax-payment' class='output'></td></tr>
+        <tr><td>Insurance</td><td><output name='insurance-payment' class='output'></td></tr>
+        <tr><td>PITI</td><td><output name='piti-payment' class='output stress'></td></tr>
+        <tr><td>+Additional Costs</td><td><output name='add-additional' class='output'></td></tr>
+        <tr><td>Total extra</td><td><output name='extra-cost' class='output stress'></td></tr>
     </table>
+    </form>
 </body>
 </html>
