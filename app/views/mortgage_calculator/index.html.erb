@@ -6,9 +6,14 @@
 </head>
 <body>
 <script type='text/javascript'>
-window.onload = function () {
-    new MortgageCalculator('mortgage-calculator','output').reset();
-};
+if(jQuery !== 'undefined'){
+  jQuery(function(){new MortgageCalculator('mortgage-calculator','output').reset();});
+}
+else{
+  window.addEventListener('load',function () {
+      new MortgageCalculator('mortgage-calculator','output').reset();
+  },false);
+}
 </script>
     <form id="mortgage-calculator">
         <input type="button" value="Reset" name="reset" />
