@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RailsSiteTest</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div ng-app='mainSite'>
+  <div class="navbar">
+    <div class="navbar-inner">
+        <ul class="nav">
+          <li><a href="#/mortgage_calculator">Mortgage Calculator</a></li>
+          <li><a href="#/oldIndex">About rails</a></li>
+        </ul>
+    </div>
+  </div>
+  <div ng-view></div>
+<div>
+<%= javascript_include_tag "application" %>
+</body>
+</html>

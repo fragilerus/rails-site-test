@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>MortgageCalculator</title>
-</head>
-<body>
 <script type='text/javascript'>
 if(jQuery !== 'undefined'){
   jQuery(function(){new MortgageCalculator('mortgage-calculator','output').reset();});
@@ -15,34 +8,32 @@ else{
   },false);
 }
 </script>
-    <form id="mortgage-calculator">
-        <input type="button" value="Reset" name="reset" />
-        <br />
-        <table>
-        <caption>Based on a 30 year monthly pament</caption>
-        <tr><td>Base Price</td><td><input type='number' name='price' autofocus /></td></tr>
-            <tr><td>Down payment</td><td><input type='number' name='downpayment' />%</td></tr>
-            <tr><td>Interest rate</td><td><input name='interest' />%</td></tr>
-            <tr><td>Tax</td>
-                <td><input name='tax' />
-                    <label class="radio inline"><input type='radio' name='tax-type' value="percent" />%</label>
-                    <label class="radio inline"><input type='radio' name='tax-type' value="absolute" />$</label>
-                </td>
-            </tr>
-            <tr><td>Insurance rate</td><td><input name='insurance' /></td></tr>
-            <tr><td>Current Monthly rent</td><td><input name='current-cost' /></td></tr>
-            <tr><td>Additional Costs (higher utils, etc.)</td><td><input name='additional' /></td></tr>
-        </table>
-    
-    <hr />
-    <table class='output'>
-        <tr><td>Pincipal + Interest</td><td><output name='mortgage-payment' class='output' /></td></tr>
-        <tr><td>Tax</td><td><output name='tax-payment' class='output'></td></tr>
-        <tr><td>Insurance</td><td><output name='insurance-payment' class='output'></td></tr>
-        <tr><td>PITI</td><td><output name='piti-payment' class='output stress'></td></tr>
-        <tr><td>+Additional Costs</td><td><output name='add-additional' class='output'></td></tr>
-        <tr><td>Total extra</td><td><output name='extra-cost' class='output stress'></td></tr>
+<form id="mortgage-calculator">
+    <input type="button" value="Reset" name="reset" />
+    <br />
+    <table>
+    <caption>Based on a 30 year monthly pament</caption>
+    <tr><td>Base Price</td><td><input type='number' name='price' autofocus /></td></tr>
+        <tr><td>Down payment</td><td><input type='number' name='downpayment' />%</td></tr>
+        <tr><td>Interest rate</td><td><input name='interest' />%</td></tr>
+        <tr><td>Tax</td>
+            <td><input name='tax' />
+                <label class="radio inline"><input type='radio' name='tax-type' value="percent" />%</label>
+                <label class="radio inline"><input type='radio' name='tax-type' value="absolute" />$</label>
+            </td>
+        </tr>
+        <tr><td>Insurance rate</td><td><input name='insurance' /></td></tr>
+        <tr><td>Current Monthly rent</td><td><input name='current-cost' /></td></tr>
+        <tr><td>Additional Costs (higher utils, etc.)</td><td><input name='additional' /></td></tr>
     </table>
-    </form>
-</body>
-</html>
+
+<hr />
+<table class='output'>
+    <tr><td>Pincipal + Interest</td><td><output name='mortgage-payment' class='output' /></td></tr>
+    <tr><td>Tax</td><td><output name='tax-payment' class='output'></td></tr>
+    <tr><td>Insurance</td><td><output name='insurance-payment' class='output'></td></tr>
+    <tr><td>PITI</td><td><output name='piti-payment' class='output stress'></td></tr>
+    <tr><td>+Additional Costs</td><td><output name='add-additional' class='output'></td></tr>
+    <tr><td>Total extra</td><td><output name='extra-cost' class='output stress'></td></tr>
+</table>
+</form>
