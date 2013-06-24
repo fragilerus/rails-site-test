@@ -8,25 +8,64 @@ else{
   },false);
 }
 </script>
-<form id="mortgage-calculator">
-    <input type="button" value="Reset" name="reset" />
+<form id="mortgage-calculator" class="form-horizontal">
+    <input type="button" value="Reset" name="reset" class="btn btn-warning"/>
     <br />
-    <table>
-    <caption>Based on a 30 year monthly pament</caption>
-    <tr><td>Base Price</td><td><input type='number' name='price' autofocus /></td></tr>
-        <tr><td>Down payment</td><td><input type='number' name='downpayment' />%</td></tr>
-        <tr><td>Interest rate</td><td><input name='interest' />%</td></tr>
-        <tr><td>Tax</td>
-            <td><input name='tax' />
-                <label class="radio inline"><input type='radio' name='tax-type' value="percent" />%</label>
-                <label class="radio inline"><input type='radio' name='tax-type' value="absolute" />$</label>
-            </td>
-        </tr>
-        <tr><td>Insurance rate</td><td><input name='insurance' /></td></tr>
-        <tr><td>Current Monthly rent</td><td><input name='current-cost' /></td></tr>
-        <tr><td>Additional Costs (higher utils, etc.)</td><td><input name='additional' /></td></tr>
-    </table>
-
+    <fieldset>
+        <ledgend>Based on a 30 year monthly pament</ledgend>
+        <div class="control-group">
+            <label class="control-label" for="price">Base Price</label>
+            <div class="controls">
+                <input class="input-small" type='number' name='price' id='price' autofocus />
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for='downpayment'>Down payment</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input class="input-small" type='number' name='downpayment' id='downpayment' />
+                    <span class="add-on">%</span>
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="interest">Interest rate</label>
+            <div class="controls">
+                <div class="input-append">
+                    <input class="input-small" name='interest' id='interest' type="text"/>
+                    <span class="add-on">%</span>
+                </div>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="tax">Tax</label>
+            <div class="controls">
+                <input class="input-small" id="tax" name='tax' type="text"/>
+                <input type='radio' name='tax-type' id="tax-type-percent" value="percent" />
+                <label class="radio inline" for="tax-type-percent">%</label>
+                <input type='radio' name='tax-type' id="tax-type-absolute" value="absolute" />
+                <label class="radio inline" for="tax-type-absolute">$</label>
+            </div>
+        </div>
+        <div class="control-group">    
+          <label class="control-label" for="insurance">Insurance rate</label>
+          <div class="controls">
+            <input class="input-small" name='insurance' type="text"/>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="current-cost">Current Monthly rent</label>
+          <div class="controls">
+            <input class="input-small" name='current-cost' type="text" />
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="additional">Additional Costs (higher utils, etc.)</label>
+          <div class="controls">
+            <input class="input-small" type="text" name='additional' />
+          </div>
+        </div>
+    </fieldset>
 <hr />
 <table class='output'>
     <tr><td>Pincipal + Interest</td><td><output name='mortgage-payment' class='output' /></td></tr>
