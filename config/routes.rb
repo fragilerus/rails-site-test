@@ -1,5 +1,7 @@
 RailsSiteTest::Application.routes.draw do
   get "mortgage_calculator/index"
+  match 'http' => 'http#index'
+  match 'http/get' => 'http#get'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
