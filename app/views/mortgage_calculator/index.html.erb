@@ -1,12 +1,19 @@
 <script type='text/javascript'>
-if(jQuery !== 'undefined'){
-  jQuery(function(){new MortgageCalculator('mortgage-calculator','output').reset();});
-}
-else{
-  window.addEventListener('load',function () {
-      new MortgageCalculator('mortgage-calculator','output').reset();
-  },false);
-}
+function init(){
+    new MortgageCalculator('mortgage-calculator','output').reset();
+    jQuery('button[data-toggle-id]').each(function() {
+        var button = $(this);
+        var refId = button.attr('data-toggle-id');
+        var refEle = $('#' + refId);
+        if (refEle.is(':checked'))
+            button.click();
+        button.on('click', function() {
+            refEle.prop('checked',true);
+            refEle.change();
+        });
+    });
+};
+jQuery(init);
 </script>
 <form id="mortgage-calculator" class="form-horizontal">
     <input type="button" value="Reset" name="reset" class="btn btn-warning"/>
@@ -39,12 +46,14 @@ else{
         </div>
         <div class="control-group">
             <label class="control-label" for="tax">Tax</label>
-            <div class="controls">
+            <div class="btn-group" data-toggle="buttons-radio">
                 <input class="input-small" id="tax" name='tax' type="text"/>
-                <input type='radio' name='tax-type' id="tax-type-percent" value="percent" />
-                <label class="radio inline" for="tax-type-percent">%</label>
-                <input type='radio' name='tax-type' id="tax-type-absolute" value="absolute" />
-                <label class="radio inline" for="tax-type-absolute">$</label>
+                <button type="button" class="btn btn-primary" value="percent" data-toggle="button" data-toggle-id="tax-type-percent">%</button>
+                <button type="button" class="btn btn-primary" value="absolute" data-toggle="button" data-toggle-id="tax-type-absolute">$</button>
+            </div>
+            <div style="display: none">
+                <input type="radio" name="tax-type" id="tax-type-percent" value="percent">
+                <input type="radio" name="tax-type" id="tax-type-absolute" value="absolute">
             </div>
         </div>
         <div class="control-group">    
