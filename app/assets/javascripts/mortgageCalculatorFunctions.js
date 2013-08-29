@@ -2,6 +2,11 @@ MortgageCalculator = function(form, output){
   this._form = document.getElementById(form);
   this._output = document.getElementById(output);
   this.wireUp.call(this);
+  if(!localStorage['inputs.price']){
+    this.reset.call(this);
+  }else{
+    this.loadFromPersisted.call(this);
+  }
 };
 
 MortgageCalculator.prototype = function(){ 
@@ -21,15 +26,26 @@ MortgageCalculator.prototype = function(){
     },
     
     reset = function () {
-        this._form.price.value = 0;
-        this._form.downpayment.value = 20;
-        this._form.interest.value = 3.4;
-        this._form.tax.value = 0.022;
-        setSelectedValue(this._form['tax-type'],'percent');
-        this._form.insurance.value = 0.0024;
-        this._form.additional.value = 0;
-        this._form['current-cost'].value = 0;
-        
+        localStorage['inputs.price'] = 0;
+        localStorage['inputs.interest'] = 4.5; 
+        localStorage['inputs.additional'] = 0;
+        localStorage['inputs.currentCost'] = 0;
+        localStorage['inputs.downpayment'] = 20; 
+        localStorage['inputs.tax'] = 0.022;
+        localStorage['inputs.taxType'] = 'percent';
+        localStorage['inputs.insurance'] = 0.0024;
+        loadFromPersisted.call(this);
+    },
+
+    loadFromPersisted = function(){
+      this._form.price.value = localStorage['inputs.price'];
+      this._form.interest.value = localStorage['inputs.interest'];
+      this._form.additional = localStorage['inputs.additional'];
+      this._form.currentCost.value = localStorage['inputs.currentCost'];
+      this._form.downpayment.value = localStorage['inputs.downpayment'];
+      this._form.tax.value = localStorage['inputs.tax'];
+      setSelectedValue(this._form.taxType,localStorage['inputs.taxType']);
+      this._form.insurance.value = localStorage['inputs.insurance'];
     },
 
     currencyFormatted = function(amount) {
@@ -51,14 +67,19 @@ MortgageCalculator.prototype = function(){
         this._form[id].value = currencyFormatted(value);
     },
     
+    valueChanged = function(element){
+      localStorage['inputs.' + element.target.name] = element.target.value;
+      calculatePayment.call(this);
+    },
+
     calculatePayment = function() {
         var princ = this._form.price.value * ((100 - this._form.downpayment.value) / 100);
         var intRate = (this._form.interest.value / 100) / 12;
-        var currentCost = this._form['current-cost'].value == '' ? 0 : (this._form['current-cost'].value * 1);
+        var currentCost = this._form.currentCost.value == '' ? 0 : (this._form.currentCost.value * 1);
         var additionalCost = this._form.additional.value == '' ? 0 : (this._form.additional.value * 1);
         var months = 30 * 12;
         var monthlyPayment = Math.floor((princ * intRate) / (1 - Math.pow(1 + intRate, (-1 * months))) * 100) / 100;
-        var taxPayment = (getSelectedValue(this._form['tax-type']) == 'percent' ? this._form.tax.value * this._form.price.value : this._form.tax.value) / 12;
+        var taxPayment = (getSelectedValue(this._form.taxType) == 'percent' ? this._form.tax.value * this._form.price.value : this._form.tax.value) / 12;
         var insurancePayment = this._form.insurance.value * this._form.price.value / 12;
         var pitiPayment = monthlyPayment + taxPayment + insurancePayment;
         setValue.call(this,'mortgage-payment', monthlyPayment);
@@ -70,21 +91,22 @@ MortgageCalculator.prototype = function(){
     },
       
     wireUp = function(){
-      this._form.price.onblur = calculatePayment.bind(this);
-      this._form.downpayment.onblur = calculatePayment.bind(this);
-      this._form.interest.onblur = calculatePayment.bind(this);
-      this._form.tax.onblur = calculatePayment.bind(this);
-      this._form['tax-type'][0].onchange = calculatePayment.bind(this);
-      this._form['tax-type'][1].onchange = calculatePayment.bind(this);
-      this._form.insurance.onblur = calculatePayment.bind(this);
-      this._form.additional.onblur = calculatePayment.bind(this);
-      this._form['current-cost'].onblur = calculatePayment.bind(this);
+      this._form.price.onblur = valueChanged.bind(this);
+      this._form.downpayment.onblur = valueChanged.bind(this);
+      this._form.interest.onblur = valueChanged.bind(this);
+      this._form.tax.onblur = valueChanged.bind(this);
+      this._form.taxType[0].onchange = valueChanged.bind(this);
+      this._form.taxType[1].onchange = valueChanged.bind(this);
+      this._form.insurance.onblur = valueChanged.bind(this);
+      this._form.additional.onblur = valueChanged.bind(this);
+      this._form.currentCost.onblur = valueChanged.bind(this);
       this._form.reset.onclick = reset.bind(this);
     };
     
     return {
       reset: reset,
       wireUp: wireUp,
+      loadFromPersisted: loadFromPersisted,
       calculatePayment: calculatePayment
     };
 }();

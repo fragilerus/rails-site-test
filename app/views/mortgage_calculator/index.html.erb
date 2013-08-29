@@ -1,6 +1,6 @@
 <script type='text/javascript'>
 function init(){
-    new MortgageCalculator('mortgage-calculator','output').reset();
+    new MortgageCalculator('mortgage-calculator','output');
     jQuery('button[data-toggle-id]').each(function() {
         var button = $(this);
         var refId = button.attr('data-toggle-id');
@@ -52,8 +52,8 @@ jQuery(init);
                 <button type="button" class="btn btn-primary" value="absolute" data-toggle="button" data-toggle-id="tax-type-absolute">$</button>
             </div>
             <div style="display: none">
-                <input type="radio" name="tax-type" id="tax-type-percent" value="percent">
-                <input type="radio" name="tax-type" id="tax-type-absolute" value="absolute">
+                <input type="radio" name="taxType" id="tax-type-percent" value="percent">
+                <input type="radio" name="taxType" id="tax-type-absolute" value="absolute">
             </div>
         </div>
         <div class="control-group">    
@@ -63,9 +63,9 @@ jQuery(init);
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="current-cost">Current Monthly rent</label>
+          <label class="control-label" for="currentCost">Current Monthly rent</label>
           <div class="controls">
-            <input class="input-small" name='current-cost' type="text" />
+            <input class="input-small" name='currentCost' type="text" />
           </div>
         </div>
         <div class="control-group">
