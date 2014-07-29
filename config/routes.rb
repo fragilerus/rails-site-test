@@ -1,4 +1,6 @@
 RailsSiteTest::Application.routes.draw do
+  
+  resources :ping
   get "mortgage_calculator/index"
   match 'http' => 'http#index'
   match 'http/get' => 'http#get'

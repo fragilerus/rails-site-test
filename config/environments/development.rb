@@ -34,4 +34,7 @@ RailsSiteTest::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  require 'socket'
+  config.host_base_url ="http://#{Socket.gethostname}:#{ENV['PORT']}"
 end
