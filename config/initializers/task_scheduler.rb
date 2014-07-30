@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'rufus/scheduler'
+=begin
+	
 base_dir = File.expand_path("../../../app/models/tasks", __FILE__)
 Dir[base_dir + '/*.rb'].each do |f| 
 	Rails.logger.info "loading task #{f}"
@@ -16,13 +18,5 @@ Task.find(:all).each do |task|
 		Rails.logger.warn "#{Time.now}: failed to run task '#{task.runner}' with args '#{task.arguments}'.\n#{e.message}\n#{e.backtrace}"
 	end
 end
-=begin
-scheduler.every("10s") do
-	begin
-		Object.const_get('PingTask').new.run
-	rescue Exception => e
-		Rails.logger.warn "failed to run task PingTask with args ''.\n#{e.message}\n#{e.backtrace}" 
-	end
-	
-end
+
 =end
